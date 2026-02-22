@@ -10,6 +10,8 @@ import Register from "./features/auth/Register.tsx";
 import { Provider } from 'react-redux';
 import store from './app/store.ts'
 import Home from "./components/Home.tsx";
+import CreateStore from "./features/vendor/CreateStore.tsx";
+import AddProduct from "./features/vendor/AddProduct.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
       {
         path:"/register",
         element:<Register></Register>
+      },
+      {
+        path:"/createStore",
+        element:<CreateStore></CreateStore>
+      },
+      {
+        path:"/addProduct",
+        element:<AddProduct></AddProduct>
       },
     ]
   },

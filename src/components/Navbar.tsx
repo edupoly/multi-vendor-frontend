@@ -1,13 +1,20 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { logout } from "../features/auth/authSlice";
+import { logout, updateUser } from "../features/auth/authSlice";
+import { useEffect } from "react";
 function Navbar() {
     const {userDetails} = useSelector(state=>state.auth)
     const dispatch = useDispatch();
     console.log(userDetails);
+    useEffect(()=>{
+      const userInfo = JSON.parse(window.localStorage.getItem("userInfo")!);
+      if(userInfo.token){
+        dispatch(updateUser(userInfo))
+      }
+    },[])
   return (
     <nav className="navbar bg-primary navbar-expand-lg navbar-dark">
-  <div className="container-fluid">
+  <div className="container">
     <Link className="navbar-brand" to="/">MarketPlace</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
@@ -31,7 +38,15 @@ function Navbar() {
         }
         {
             userDetails.token && (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link active" to="/createStore">Create Store</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link active" to="/addProduct">Add Product</Link>
+                </li>
                 <button className="btn btn-success" onClick={()=>{dispatch(logout())}}>Logout</button>
+              </>
             )
         }
       </ul>

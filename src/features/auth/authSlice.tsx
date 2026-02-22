@@ -14,7 +14,8 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     updateUser: (state,action) => {
-      state.userDetails = {...action.payload.data}
+      window.localStorage.setItem("userInfo",JSON.stringify(action.payload))
+      state.userDetails = {...action.payload}
     },
     logout:(state)=>{
         state.userDetails={...initialState.userDetails}

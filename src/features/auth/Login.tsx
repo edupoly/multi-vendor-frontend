@@ -16,7 +16,8 @@ function Login() {
           },
           onSubmit:(values)=>{
               loginFn(values).then(res=>{
-                dispatch(updateUser(res))
+                console.log(res);
+                dispatch(updateUser(res.data))
                 navigate("/")
               }).catch(err=>{console.log(err)})
           }
