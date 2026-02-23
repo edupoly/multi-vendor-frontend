@@ -8,7 +8,7 @@ function Navbar() {
     console.log(userDetails);
     useEffect(()=>{
       const userInfo = JSON.parse(window.localStorage.getItem("userInfo")!);
-      if(userInfo.token){
+      if(userInfo?.token){
         dispatch(updateUser(userInfo))
       }
     },[])
@@ -45,7 +45,7 @@ function Navbar() {
                 <li className="nav-item">
                   <Link className="nav-link active" to="/addProduct">Add Product</Link>
                 </li>
-                <button className="btn btn-success" onClick={()=>{dispatch(logout())}}>Logout</button>
+                <button className="btn btn-success" onClick={()=>{dispatch(logout())}}>{userDetails.name} Logout</button>
               </>
             )
         }

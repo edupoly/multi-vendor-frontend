@@ -21,7 +21,7 @@ function AddProduct() {
       })
     return (
       <div className='px-5'>
-          <h1>Create Store</h1>
+          <h1>Add Product</h1>
           <form onSubmit={productForm.handleSubmit}>
               <input type="text" {...productForm.getFieldProps("name")} placeholder='Enter Product Name'/>
               <br />
@@ -33,7 +33,7 @@ function AddProduct() {
               <br />
               <input type="text" {...productForm.getFieldProps("image")} placeholder='Enter Image URL'/>
               <br />
-              <button>Add Store</button>
+              <button>Add Product</button>
           </form>
       </div>
     )

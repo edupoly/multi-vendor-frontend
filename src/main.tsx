@@ -12,6 +12,7 @@ import store from './app/store.ts'
 import Home from "./components/Home.tsx";
 import CreateStore from "./features/vendor/CreateStore.tsx";
 import AddProduct from "./features/vendor/AddProduct.tsx";
+import VendorProducts from "./features/vendor/VendorProducts.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path:"/addProduct",
         element:<AddProduct></AddProduct>
+      },
+      {
+        path:"/vendorProducts/:id",
+        element:<VendorProducts></VendorProducts>
       },
     ]
   },

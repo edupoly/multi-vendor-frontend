@@ -18,6 +18,12 @@ export const vendorApi = createApi({
         body: store,
       }),
     }),
+    getStores: builder.query({
+      query: () => `/stores`,
+    }),
+    getVendorProducts: builder.query({
+      query: (vendorId) => `/products/vendorProducts/${vendorId}`,
+    }),
     addProduct: builder.mutation({
       query: ({ product, token }) => ({
         url: `/products`,
@@ -33,4 +39,9 @@ export const vendorApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useAddStoreMutation, useAddProductMutation } = vendorApi;
+export const {
+  useAddStoreMutation,
+  useAddProductMutation,
+  useGetStoresQuery,
+  useGetVendorProductsQuery,
+} = vendorApi;

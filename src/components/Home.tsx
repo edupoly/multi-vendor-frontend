@@ -1,4 +1,5 @@
 import React from 'react';
+import Stores from '../features/vendor/Stores';
 
 const Home: React.FC = () => {
   return (
@@ -9,6 +10,7 @@ const Home: React.FC = () => {
           <p className="lead">Browse vendors, manage products, and shop with ease.</p>
         </div>
       </div>
+      <Stores></Stores>
     </div>
   );
 };
