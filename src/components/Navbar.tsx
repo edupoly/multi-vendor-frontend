@@ -36,6 +36,9 @@ function Navbar() {
                     <li className="nav-item">
                         <Link className="nav-link" to="/register">Register</Link>
                     </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/buyerRegister">Buyer Registration</Link>
+                    </li>
                 </>
             )
         }
@@ -43,16 +46,19 @@ function Navbar() {
             userDetails.token && (
               <>
                 {isVendor && (
+                  <>
                   <li className="nav-item">
                     <Link className="nav-link" to="/vendor-dashboard">Dashboard</Link>
                   </li>
-                )}
-                <li className="nav-item">
+                  <li className="nav-item">
                   <Link className="nav-link active" to="/createStore">Create Store</Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link active" to="/addProduct">Add Product</Link>
                 </li>
+                  </>
+                )}
+                
                 <button className="btn btn-success" onClick={()=>{dispatch(logout())}}>{userDetails.name} Logout</button>
               </>
             )
