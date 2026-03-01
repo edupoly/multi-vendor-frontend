@@ -18,7 +18,13 @@ function Login() {
               loginFn(values).then(res=>{
                 console.log(res);
                 dispatch(updateUser(res.data))
-                navigate("/")
+                // If logged in user is a vendor, navigate to vendor dashboard
+                const role = res.data?.role || res.data?.user?.role
+                if(role === 'vendor'){
+                  navigate('/vendor-dashboard')
+                } else {
+                  navigate('/')
+                }
               }).catch(err=>{console.log(err)})
           }
       })

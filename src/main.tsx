@@ -13,6 +13,7 @@ import Home from "./components/Home.tsx";
 import CreateStore from "./features/vendor/CreateStore.tsx";
 import AddProduct from "./features/vendor/AddProduct.tsx";
 import VendorProducts from "./features/vendor/VendorProducts.tsx";
+import VendorDashboard from "./features/vendor/VendorDashboard.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path:"/vendorProducts/:id",
         element:<VendorProducts></VendorProducts>
+      },
+      {
+        path: "/vendor-dashboard",
+        element: <VendorDashboard />
       },
     ]
   },

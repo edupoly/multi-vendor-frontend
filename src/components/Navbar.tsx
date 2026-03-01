@@ -12,6 +12,9 @@ function Navbar() {
         dispatch(updateUser(userInfo))
       }
     },[])
+
+    // determine if logged in user is a vendor
+    const isVendor = userDetails?.role === 'vendor' || userDetails?.user?.role === 'vendor'
   return (
     <nav className="navbar bg-primary navbar-expand-lg navbar-dark">
   <div className="container">
@@ -39,6 +42,11 @@ function Navbar() {
         {
             userDetails.token && (
               <>
+                {isVendor && (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/vendor-dashboard">Dashboard</Link>
+                  </li>
+                )}
                 <li className="nav-item">
                   <Link className="nav-link active" to="/createStore">Create Store</Link>
                 </li>
