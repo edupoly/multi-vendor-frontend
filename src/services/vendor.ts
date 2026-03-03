@@ -21,6 +21,15 @@ export const vendorApi = createApi({
     getStores: builder.query({
       query: () => `/stores`,
     }),
+    getVendorOrders: builder.query({
+      query: ({ token }) => ({
+        url: `/orders`,
+        method: "GET",
+        headers: {
+          "x-auth-token": token,
+        },
+      }),
+    }),
     getVendorProducts: builder.query({
       query: (vendorId) => `/products/vendorProducts/${vendorId}`,
     }),
@@ -44,4 +53,5 @@ export const {
   useAddProductMutation,
   useGetStoresQuery,
   useGetVendorProductsQuery,
+  useGetVendorOrdersQuery,
 } = vendorApi;

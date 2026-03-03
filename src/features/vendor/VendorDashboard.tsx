@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { useGetVendorProductsQuery } from '../../services/vendor'
+import { useGetVendorOrdersQuery, useGetVendorProductsQuery } from '../../services/vendor'
 
 
 const VendorDashboard: React.FC = () => {
@@ -13,6 +13,9 @@ const VendorDashboard: React.FC = () => {
   const vendorId = (ud && ((ud as any)._id || (ud as any).id || (ud as any).user?._id || (ud as any).user?.id)) || null
 
   const { isLoading, data } = useGetVendorProductsQuery(vendorId, { skip: !vendorId })
+
+  const { isLoading: ordersLoading, data: ordersData } = useGetVendorOrdersQuery({token:userDetails.token});
+  console.log("ordersData::", ordersLoading, ordersData);
 
   // derive products list synchronously from RTK Query result
   const productsArray = Array.isArray(data) ? data : []

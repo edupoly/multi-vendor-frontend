@@ -25,7 +25,7 @@ function Cart() {
     placeOrderFn(null)
       .then((res) => {
         console.log("Order placed", res)
-        dispatch(clearCart())
+        // dispatch(clearCart())
       }).catch((err) => {
         console.log("Error placing order", err)
       })
