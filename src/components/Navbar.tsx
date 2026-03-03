@@ -4,6 +4,8 @@ import { logout, updateUser } from "../features/auth/authSlice";
 import { useEffect } from "react";
 function Navbar() {
     const {userDetails} = useSelector(state=>state.auth)
+    const {cartItems} = useSelector(state=>state.cart)
+
     const dispatch = useDispatch();
     console.log(userDetails);
     useEffect(()=>{
@@ -15,6 +17,7 @@ function Navbar() {
 
     // determine if logged in user is a vendor
     const isVendor = userDetails?.role === 'vendor' || userDetails?.user?.role === 'vendor'
+    const isBuyer = userDetails?.role === 'buyer' || userDetails?.user?.role === 'buyer';
   return (
     <nav className="navbar bg-primary navbar-expand-lg navbar-dark">
   <div className="container">
@@ -58,10 +61,15 @@ function Navbar() {
                 </li>
                   </>
                 )}
-                
+                {isBuyer && (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/cart">Cart({cartItems.length})</Link>
+                  </li>
+                )}
                 <button className="btn btn-success" onClick={()=>{dispatch(logout())}}>{userDetails.name} Logout</button>
               </>
             )
+
         }
       </ul>
     </div>

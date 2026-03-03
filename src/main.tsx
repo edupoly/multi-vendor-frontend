@@ -15,6 +15,7 @@ import AddProduct from "./features/vendor/AddProduct.tsx";
 import VendorProducts from "./features/vendor/VendorProducts.tsx";
 import VendorDashboard from "./features/vendor/VendorDashboard.tsx";
 import BuyerRegister from "./features/auth/Buyer-Register.tsx";
+import Cart from "./features/buyer/Cart.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path:"/createStore",
         element:<CreateStore></CreateStore>
+      },
+      {
+        path:"/cart",
+        element:<Cart></Cart>
       },
       {
         path:"/addProduct",
