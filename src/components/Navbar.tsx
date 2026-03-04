@@ -1,9 +1,12 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link,useNavigate } from "react-router-dom"
 import { logout, updateUser } from "../features/auth/authSlice";
 import { useEffect } from "react";
 function Navbar() {
     const {userDetails} = useSelector(state=>state.auth)
+    const {cartItems} = useSelector(state=>state.cart)
+  console.log(cartItems);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     console.log(userDetails);
     useEffect(()=>{
@@ -12,6 +15,10 @@ function Navbar() {
         dispatch(updateUser(userInfo))
       }
     },[])
+    const handleLogout=()=>{
+      dispatch(logout())
+      navigate("/login")
+    }
   return (
     <nav className="navbar bg-primary navbar-expand-lg navbar-dark">
   <div className="container">
@@ -31,7 +38,10 @@ function Navbar() {
                         <Link className="nav-link" to="/login">Login</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/register">Register</Link>
+                        <Link className="nav-link" to="/signup">Signup</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/vendorRegistration">Vendor Registration</Link>
                     </li>
                 </>
             )
@@ -39,13 +49,31 @@ function Navbar() {
         {
             userDetails.token && (
               <>
-                <li className="nav-item">
-                  <Link className="nav-link active" to="/createStore">Create Store</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link active" to="/addProduct">Add Product</Link>
-                </li>
-                <button className="btn btn-success" onClick={()=>{dispatch(logout())}}>{userDetails.name} Logout</button>
+                {
+                  userDetails.role === "vendor" && (
+                    <>
+                      <li className="nav-item">
+                        <Link className="nav-link" to="/vendorDashboard">Vendor Dashboard</Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="nav-link" to="/createStore">Create Store</Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="nav-link" to="/addProduct">Add Product</Link>
+                      </li>
+                    </>
+                  )
+                }
+                {
+                  userDetails.role === "buyer" && (
+                    <>
+                      <li className="nav-item">
+                        <Link className="nav-link" to="/cart">({cartItems?.length}) Cart</Link>
+                      </li>
+                    </>
+                  )
+                }
+                <button className="btn btn-success" onClick={()=>{handleLogout()}}>{userDetails.name} Logout</button>
               </>
             )
         }

@@ -18,7 +18,12 @@ function Login() {
               loginFn(values).then(res=>{
                 console.log(res);
                 dispatch(updateUser(res.data))
-                navigate("/")
+                if(res.data.role === "vendor"){
+                  navigate("/vendorDashboard")
+                }
+                if(res.data.role === "buyer"){
+                  navigate("/")
+                }
               }).catch(err=>{console.log(err)})
           }
       })

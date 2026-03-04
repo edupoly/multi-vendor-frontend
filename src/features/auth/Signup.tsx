@@ -1,15 +1,14 @@
 import { useFormik } from 'formik'
-import React from 'react'
 import { useRegisterMutation } from '../../services/auth';
 
-function Register() {
+function Signup() {
     const [registerFn]=useRegisterMutation()
     const userForm = useFormik({
         initialValues:{
             name: "",
             email: "",
             password: "",
-            role: 'vendor'
+            role: 'buyer'
         },
         onSubmit:(values)=>{
             registerFn(values).then(res=>{console.log(res);}).catch(err=>{console.log(err)})
@@ -17,7 +16,7 @@ function Register() {
     })
   return (
     <div className='px-5'>
-        <h1>Register</h1>
+        <h1>Signup</h1>
         <form onSubmit={userForm.handleSubmit}>
             <input type="text" {...userForm.getFieldProps("name")} placeholder='Enter your name'/>
             <br />
@@ -25,10 +24,10 @@ function Register() {
             <br />
             <input type="text" {...userForm.getFieldProps("password")} placeholder='Enter your password'/>
             <br />
-            <button>Register</button>
+            <button>Signup</button>
         </form>
     </div>
   )
 }
 
-export default Register
+export default Signup

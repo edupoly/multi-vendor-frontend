@@ -19,6 +19,7 @@ export const authSlice = createSlice({
     },
     logout:(state)=>{
         state.userDetails={...initialState.userDetails}
+        window.localStorage.removeItem("userInfo")
     }
   },
 })

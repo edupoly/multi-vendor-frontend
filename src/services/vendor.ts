@@ -1,5 +1,6 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { addToCart } from "../features/cart/cartSlice";
 
 // Define a service using a base URL and expected endpoints
 export const vendorApi = createApi({
@@ -8,6 +9,19 @@ export const vendorApi = createApi({
     baseUrl: "http://localhost:8000/api/",
   }),
   endpoints: (builder) => ({
+    addToCart: builder.mutation({
+      query: ({ cartItems, token, userId }) => ({
+        url: `/orders/addToCart`,
+        method: "POST",
+        headers: {
+          "x-auth-token": token,
+        },
+        body: { userId, cartItems },
+      }),
+    }),
+    getCartItems: builder.query({
+      query: (userId) => `/orders/cart/${userId}`,
+    }),
     addStore: builder.mutation({
       query: ({ store, token }) => ({
         url: `/stores`,
@@ -44,4 +58,6 @@ export const {
   useAddProductMutation,
   useGetStoresQuery,
   useGetVendorProductsQuery,
+  useAddToCartMutation,
+  useGetCartItemsQuery,
 } = vendorApi;
